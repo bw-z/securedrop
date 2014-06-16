@@ -1,4 +1,3 @@
-
 <?php
 
 // Start a session and create a userID if one does not already exist
@@ -23,6 +22,16 @@ function genRandomString($l) {
       	$string .= $alfa[rand(0, strlen($alfa)-1)];
     }
     return $string;
+}
+
+// Check and redirect user to HTTPS if required
+function validateHTTPS($config) {
+	if ($config['requireHTTPS']) {
+		if (empty($_SERVER['HTTPS'])) {
+		    header('Location: https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+		    die();
+		}
+	}
 }
 
 ?>
