@@ -83,6 +83,10 @@ validateHTTPS($config);
 	        	}
         	?> 
         	after they are uploaded.</p>
+        	
+        <? if (isset($_GET['badfile'])) { ?>
+        	<div class="alert alert-danger"><b>Invalid Link</b> The download link you have followed is invalid or expired. </div>
+        <? } ?>
         
         <form action="_interfaces/upload.php" class="dropzone"></form>
 		

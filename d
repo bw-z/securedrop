@@ -19,10 +19,14 @@
 	    
 	    $query->bind_result($a);
 	    while ($query->fetch()) {
-	    	
 	    	$filename = $a; 
-	    	
 	    }
+	    
+	if (!isset($filename)) {
+		sleep(2);
+		header("Location: ../?badfile");
+		die();
+	}
     
     header("Content-disposition: attachment; filename=$filename");
     readfile($targetFile);
