@@ -7,14 +7,10 @@
 	
 	validateHTTPS($config);
     
-    $ds = DIRECTORY_SEPARATOR; 
-    $storeFolder = 'uploads'; 
-    $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
-    
     $expl = explode("/",$_SERVER["REQUEST_URI"]);
     $accesskey = $expl[count($expl)-1];
     
-    $targetFile =  $targetPath . $accesskey;
+    $targetFile =  $config['upload_location'] . $accesskey;
     
      $query = $db->prepare('SELECT filename FROM files WHERE accesskey = ?');
 		$query->bind_param('s', $accesskey);

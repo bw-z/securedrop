@@ -5,14 +5,10 @@ include_once("../core.php");
 
 validateHTTPS($config);
 
-$ds = DIRECTORY_SEPARATOR;
-$storeFolder = 'uploads'; 
  
 if (!empty($_FILES)) {
      
     $tempFile = $_FILES['file']['tmp_name'];        
-      
-    $targetPath = dirname( __FILE__ ) . $ds . ".." . $ds  . $storeFolder . $ds; 
     
     $filekey = genKey(20);
 	$timestamp = time();
@@ -34,7 +30,7 @@ if (!empty($_FILES)) {
 							$expiry);
 	$query->execute();
 	
-    $targetFile = $targetPath . $filekey; 
+    $targetFile = $config['upload_location'] . $filekey; 
     move_uploaded_file($tempFile, $targetFile); 
      
 }

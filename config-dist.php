@@ -23,4 +23,10 @@ $config['file_expiry'] = 7 * 24;
 // Homepage for securedrop
 $config['securedrop_home'] = "http://localhost:8888/securedrop";
 
+// Upload location
+// ensure you can write to this folder, and it should be proteced from indexes etc
+// pref outside web root
+$ds = DIRECTORY_SEPARATOR;
+$config['upload_location'] = dirname( __FILE__ ) . $ds  . "uploads" . $ds; 
+
 ?>
