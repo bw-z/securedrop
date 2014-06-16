@@ -10,7 +10,7 @@
     $expl = explode("/",$_SERVER["REQUEST_URI"]);
     $accesskey = $expl[count($expl)-1];
     
-    $targetFile =  $config['upload_location'] . $accesskey;
+    $targetFile =  $config['upload_location'] . $accesskey . ".secureuploadfile";
     
      $query = $db->prepare('SELECT filename FROM files WHERE accesskey = ?');
 		$query->bind_param('s', $accesskey);

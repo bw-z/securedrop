@@ -30,7 +30,7 @@ if (!empty($_FILES)) {
 							$expiry);
 	$query->execute();
 	
-    $targetFile = $config['upload_location'] . $filekey; 
+    $targetFile = $config['upload_location'] . $filekey . ".secureuploadfile"; 
     move_uploaded_file($tempFile, $targetFile); 
      
 }
