@@ -87,6 +87,12 @@ validateHTTPS($config);
         <? if (isset($_GET['badfile'])) { ?>
         	<div class="alert alert-danger"><b>Invalid Link</b> The download link you have followed is invalid or expired. </div>
         <? } ?>
+        <? if (isset($_GET['baddelete'])) { ?>
+        	<div class="alert alert-danger"><b>Error</b> You cannot delete this file. </div>
+        <? } ?>
+        <? if (isset($_GET['deleted'])) { ?>
+        	<div class="alert alert-success"><b>File Deleted</b> <?=htmlspecialchars($_GET['file'])?> has been deleted. </div>
+        <? } ?>
         
         <form action="_interfaces/upload.php" class="dropzone"></form>
 		
@@ -125,7 +131,7 @@ validateHTTPS($config);
 	    			stuff += " \
 	    			<tr> \
 						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\">" + data[i].filename + "</a></td> \
-						<td><a href=\"delete/" + data[i].index + "\">Delete</a></td> \
+						<td><a href=\"delete/" + data[i].fileid + "\">Delete</a></td> \
 						<td>" + data[i].textDate + "</a></td> \
 						<td>" + data[i].expires + "</a></td> \
 						<td></a></td> \

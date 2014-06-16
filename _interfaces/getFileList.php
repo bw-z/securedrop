@@ -41,7 +41,7 @@
 	    $query->bind_result($a, $b, $c, $d, $e);
 	    while ($query->fetch()) {
 	    	
-	    	$file['index'] = $d;
+	    	$file['fileid'] = $d;
 	    	$file['filename'] = htmlspecialchars($b); 
 	    	$file['accesskey'] = $a; 
 	    	$file['timestamp'] = $c;
