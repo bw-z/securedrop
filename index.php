@@ -49,14 +49,12 @@ if (isset($_GET['encrypt'])) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SecureDrop</a>
+          <a class="navbar-brand" href="#">SecureDrop<sup>beta</sup></a>
         </div>
-        <!--
+        
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="mailto:<?=$config['contact_email']?>">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
 		
@@ -91,14 +89,18 @@ if (isset($_GET['encrypt'])) {
         	after they are uploaded. 
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	File Encryption:<sup>Beta</sup>
         	
-        	&nbsp;&nbsp;&nbsp; 
+        	<? if ($config['encrypt']) { ?>
+	        	File Encryption:<sup>beta</sup>
+	        	
+	        	&nbsp;&nbsp;&nbsp; 
+	        	
 	        	<? if ($_SESSION['encrypt'] == "on") { ?>
 		        	<a href="?encrypt=off">On</a>
 	        	<? } else { ?>
 	        		<a href="?encrypt=on">Off</a>
 	        	<? } ?>
+	        <? } ?>
         	</p>
         	
         <? if (isset($_GET['badfile'])) { ?>

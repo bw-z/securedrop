@@ -34,4 +34,7 @@ $config['upload_location'] = dirname( __FILE__ ) . $ds  . "uploads" . $ds;
 $config['encrypt'] = false;
 //make sure you set the encryption key in the DB
 
+//contact email address
+$config['contact_email'] = "help@domain.com";
+
 ?>
