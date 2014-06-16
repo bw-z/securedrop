@@ -49,7 +49,7 @@ if (isset($_GET['encrypt'])) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SecureDrop<sup>beta</sup></a>
+          <a class="navbar-brand" href="#">SecureDrop<sup>beta <?=$config['version']?></sup></a>
         </div>
         
         <div class="collapse navbar-collapse">
