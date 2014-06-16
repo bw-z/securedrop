@@ -111,11 +111,11 @@ if (isset($_GET['encrypt'])) {
         	<div class="alert alert-success"><b>File Deleted</b> <?=htmlspecialchars($_GET['file'])?> has been deleted. </div>
         <? } ?>
         
-        <form action="_interfaces/upload.php" class="dropzone"></form>
+        
+        <form action="_interfaces/upload.php" class="dropzone" id="drop"></form>
 		
 		<h2>My Files</h2>
 		<div id="files"></div>
-
 
       </div>
 
@@ -129,6 +129,11 @@ if (isset($_GET['encrypt'])) {
     <script src="js/bootstrap.min.js"></script>
     <script src="dropzone.js"></script>
     <script>
+        Dropzone.options.drop = {
+		  maxFilesize: <?=$config['max_file_size']?>, // MB
+		};
+	</script>
+    <script>
     
     	function refreshdiv() {
     	
@@ -141,7 +146,6 @@ if (isset($_GET['encrypt'])) {
 									<th></th> \
 						    		<th>Uploaded</th> \
 									<th>Expires</th> \
-									<th>Download Count</th> \
 						    		<th>Sharelink</th> \
 						    	</tr> ";
 				
@@ -159,7 +163,6 @@ if (isset($_GET['encrypt'])) {
 						<td><a href=\"delete/" + data[i].fileid + "\">Delete</a></td> \
 						<td>" + data[i].textDate + "</a></td> \
 						<td>" + data[i].expires + "</a></td> \
-						<td></a></td> \
 						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"><?=$config['securedrop_home']?>/d/" + data[i].accesskey + "</a></td> \
 					</tr>";
 	    			
