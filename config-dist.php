@@ -10,13 +10,17 @@ $db_name = "securedrop";
 
 $config['requireHTTPS'] = false;
 
-// Maximum sile in MB - ensure that this is the same or lower than your php.ini settings for
+// Maximum sile in MB - ensure that this is the same or lower than your php.ini settings for;
 // memory_limit
 // post_max_size
+// upload_max_filesize
 $config['max_file_size'] = 30;
 
 // File expiry time in hours, after this ends the file will be removed
 // by the cron job
 $config['file_expiry'] = 7 * 24;
+
+// Homepage for securedrop
+$config['securedrop_home'] = "http://localhost:8888/securedrop";
 
 ?>

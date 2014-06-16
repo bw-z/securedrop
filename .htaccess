@@ -1,0 +1,6 @@
+<FilesMatch "^d$">
+    ForceType application/x-httpd-php
+</FilesMatch>
+<FilesMatch "^delete$">
+    ForceType application/x-httpd-php
+</FilesMatch>
