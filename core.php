@@ -4,6 +4,7 @@
 session_start();
 if (!isset($_SESSION['userid'])) {
 	$_SESSION['userid'] = genRandomString(40);
+	$_SESSION['encrypt'] = "off";
 }
 $userid = $_SESSION['userid'];
 
@@ -13,6 +14,17 @@ $db = mysqli_connect($db_server, $db_username, $db_password, $db_name);
 if (mysqli_connect_errno($db)) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+
+//get the secret key to encrypt files
+if ($config['encrypt']) {
+	$query = $db->prepare('SELECT secret FROM config');
+	$query->execute();
+	
+	$query->bind_result($a);
+	while ($query->fetch()) {
+		$config['secret'] = $a;
+	}	
+}	
 
 //function to generate a random string
 function genRandomString($l) {

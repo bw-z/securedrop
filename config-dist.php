@@ -29,4 +29,9 @@ $config['securedrop_home'] = "http://localhost:8888/securedrop";
 $ds = DIRECTORY_SEPARATOR;
 $config['upload_location'] = dirname( __FILE__ ) . $ds  . "uploads" . $ds; 
 
+
+//encrypt files at rest
+$config['encrypt'] = false;
+//make sure you set the encryption key in the DB
+
 ?>

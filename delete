@@ -23,8 +23,8 @@
 		header("Location: ../?baddelete");
 		die();
 	}
-    
-    $targetFile =  $config['upload_location'] . $accesskey . ".secureuploadfile";
+   
+    $targetFile = $config['upload_location'] . $accesskey . ".secureuploadfile";
     
     $query = $db->prepare('DELETE FROM files WHERE fileid = ? AND userid = ?');
 	$query->bind_param('ss', $fileid, $userid);

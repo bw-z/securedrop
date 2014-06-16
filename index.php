@@ -4,6 +4,10 @@ include_once("config.php");
 include_once("core.php");
 
 validateHTTPS($config);
+ 
+if (isset($_GET['encrypt'])) {
+	$_SESSION['encrypt'] = $_GET['encrypt'];
+}
 
 ?>
 
@@ -74,6 +78,8 @@ validateHTTPS($config);
       <div class="starter-template">
        	
        	<br><br><br><br>
+       	
+       	
        
         <p class="lead">Use this service to securely share files. Files are wiped 
         	<?php if ($config['file_expiry'] > 24) {
@@ -82,7 +88,18 @@ validateHTTPS($config);
 		        	echo $config['file_expiry'] . " hours ";
 	        	}
         	?> 
-        	after they are uploaded.</p>
+        	after they are uploaded. 
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	File Encryption:<sup>Beta</sup>
+        	
+        	&nbsp;&nbsp;&nbsp; 
+	        	<? if ($_SESSION['encrypt'] == "on") { ?>
+		        	<a href="?encrypt=off">On</a>
+	        	<? } else { ?>
+	        		<a href="?encrypt=on">Off</a>
+	        	<? } ?>
+        	</p>
         	
         <? if (isset($_GET['badfile'])) { ?>
         	<div class="alert alert-danger"><b>Invalid Link</b> The download link you have followed is invalid or expired. </div>
@@ -119,6 +136,7 @@ validateHTTPS($config);
     			
     			var stuff = "<table class=\"table\"> \
 						    	<tr> \
+						    		<th></th> \
 						    		<th>Filename</th> \
 									<th></th> \
 						    		<th>Uploaded</th> \
@@ -126,11 +144,18 @@ validateHTTPS($config);
 									<th>Download Count</th> \
 						    		<th>Sharelink</th> \
 						    	</tr> ";
-				    	
+				
+				 
     			for (var i = 0; i < data.length; i++) {
+    			
+    				var enc = "";
+    				if (data[i].encrypted) enc = "<span class=\"glyphicon glyphicon-lock\"></span>";
+    				
 	    			stuff += " \
 	    			<tr> \
-						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\">" + data[i].filename + "</a></td> \
+	    				<td>" + enc + "</td> \
+						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"> \
+						" + data[i].filename + "</a></td> \
 						<td><a href=\"delete/" + data[i].fileid + "\">Delete</a></td> \
 						<td>" + data[i].textDate + "</a></td> \
 						<td>" + data[i].expires + "</a></td> \

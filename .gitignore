@@ -2,3 +2,5 @@
 config.php
 
 *.secureuploadfile
+
+*.encrypteduploadfile

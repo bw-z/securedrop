@@ -32,13 +32,13 @@
 		return date("Y-m-d h:i a", $d);
 	}
     
-    $query = $db->prepare('SELECT accesskey, filename, timestamp, fileid, expiry FROM files WHERE userid = ? ORDER BY timestamp DESC');
+    $query = $db->prepare('SELECT accesskey, filename, timestamp, fileid, expiry, encrypted FROM files WHERE userid = ? ORDER BY timestamp DESC');
 		$query->bind_param('s', $userid);
 		$query->execute();
 		
 		$files = array();
 	    
-	    $query->bind_result($a, $b, $c, $d, $e);
+	    $query->bind_result($a, $b, $c, $d, $e, $f);
 	    while ($query->fetch()) {
 	    	
 	    	$file['fileid'] = $d;
@@ -47,6 +47,7 @@
 	    	$file['timestamp'] = $c;
 	    	$file['textDate'] = textDate($c);
 			$file['expires'] = textDate($e, "present");
+			$file['encrypted'] = $f;
 	    	 
 	    	array_push($files, $file);
 	    	
