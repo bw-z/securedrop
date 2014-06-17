@@ -13,17 +13,16 @@ v0.1
 - File Upload & Download
 - Delete Files
 
-v0.2 Current Stable (v0.2 branch)
+v0.2
 - Encryption at rest
 - File Expiry Date
 - Anti Brute Force Protection.
 - Some backend config vastly improved
 
-v0.3 - In progress (master branch)
+v0.3
 - User Login & LDAP integration
 
-
-v0.4
+v0.4 - wip
 - Cron job to delete jobs
 - Improved link copy
 - Extend file expiry
