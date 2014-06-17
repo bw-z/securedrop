@@ -194,7 +194,7 @@ if (isset($_GET['encrypt'])) {
     			
     		});
 			
-		    setTimeout('refreshdiv()', 5000);
+		    setTimeout('refreshdiv()', 2500);
 		}
 		
 		refreshdiv();
