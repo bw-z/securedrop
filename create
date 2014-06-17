@@ -1,0 +1,71 @@
+<?php
+
+
+include_once("config.php");
+include_once("core.php");
+
+validateHTTPS($config);
+
+if ($_SESSION['loggedin'] || !$config['allow_accounts'] || $config['auth_type'] != "local") {
+	header("Location: ../");
+}
+
+// Check for submitted form
+if (isset($_POST['email'])) {
+	$email = $_POST['email'];
+	$domain = explode("@", $email)[1];
+	$password = $_POST['password'];
+	$confirm = $_POST['confirm'];
+
+// check passwords match > 8 chars
+	if ($password != $confirm) {
+		header("Location: ../create?match");
+	    die();
+	}
+	if (strlen($password) < 6) {
+		header("Location: ./create?strength");
+	    die();
+	}
+	
+	
+
+// check email doesn't exist
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !checkdnsrr($domain, 'MX')) {
+			header("Location: ./create?email");
+		    die();
+	}
+
+//check that account doesnt exist
+	$query = $db->prepare('SELECT userid FROM users WHERE email = ?');
+	$query->bind_param('s', $email);
+	$query->execute();
+		
+	$query->bind_result($a);
+	
+    while ($query->fetch()) {	    
+	    // account already exists
+	    header("Location: ./create?exists");
+	    die();
+	}
+
+
+// create account and redirect the user if all ok
+	include_once("Bcrypt.php");
+	$bcrypt = new Bcrypt(10);
+	
+	$hash = $bcrypt->hash($password);
+	
+	$query = $db->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
+	$query->bind_param('ss', $email, $hash);
+	$query->execute();
+	
+	header("Location: ./?usercreated");
+	die();
+
+
+}
+
+include("html/create.php");
+
+
+?>

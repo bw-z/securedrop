@@ -7,6 +7,7 @@ session_start();
 if (!isset($_SESSION['userid'])) {
 	$_SESSION['userid'] = genRandomString(40);
 	$_SESSION['encrypt'] = "off";
+	$_SESSION['loggedin'] = false;
 }
 $userid = $_SESSION['userid'];
 

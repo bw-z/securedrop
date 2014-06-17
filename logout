@@ -1,0 +1,15 @@
+<?php
+
+
+include_once("config.php");
+include_once("core.php");
+
+validateHTTPS($config);
+
+$_SESSION['userid'] = genRandomString(40);
+$_SESSION['loggedin'] = false;
+
+
+header("Location: ./");
+
+?>
