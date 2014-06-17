@@ -43,13 +43,11 @@ $config['auth_type'] = "local";
 //                      local or adldap supported
 
 //for adldap auth
-$config['ADLDAP_LDAP_PORT'] = 389;
-$config['ADLDAP_LDAPS_PORT'] = 636;
-$config['ADLDAP_accountSuffix'] = "@mydomain.local";
-$config['ADLDAP_baseDn'] = "DC=mydomain,DC=local";
-$config['ADLDAP_domainControllers'] = array("dc01.mydomain.local");
-$config['ADLDAP_useSSL'] = false;
-$config['ADLDAP_useTLS'] = false;
+$config['account_suffix'] = "@mydomain.local";
+$config['base_dn'] = "DC=mydomain,DC=local";
+$config['domain_controllers'] = array('dc01.mydomain.local');
+//$config['use_ssl'] = false;
+//$config['use_tls'] = true;
 
 
 

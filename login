@@ -68,7 +68,7 @@ if (isset($_POST['email'])) {
 				$query = $db->prepare('INSERT INTO users (email) VALUES (?)');
 				$query->bind_param('s', $email);
 				$query->execute();
-				$new_userid = $query->insert_id();
+				$new_userid = $query->insert_id;
 			}
 			
 			$loginok = true;

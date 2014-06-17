@@ -33,7 +33,7 @@ if ($config['encrypt']) {
 if ($config['auth_type'] == "adldap") {
 	include ("adLDAP/adLDAP.php");
 	try {
-	    $adldap = new adLDAP();
+	    $adldap = new adLDAP($config);
 	}
 	catch (adLDAPException $e) {
 	    echo $e; 
