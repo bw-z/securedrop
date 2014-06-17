@@ -132,6 +132,11 @@ if (isset($_GET['encrypt'])) {
         
         <form action="_interfaces/upload.php" class="dropzone" id="drop"></form>
 		
+		<br>
+		<? if ($config['allow_accounts'] && !$_SESSION['loggedin']) { ?>
+        	<div class="alert alert-info"><b>Login now!</b> You can create an account or login (above) to keep track of files you have uploaded. </div>
+        <? } ?>
+		
 		<h2>My Files</h2>
 		<div id="files"></div>
 
