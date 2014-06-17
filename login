@@ -40,18 +40,7 @@ if (isset($_POST['email'])) {
 		$bcrypt = new Bcrypt(10);
 		
 		if ($bcrypt->verify($password, $hash)) {
-			// login the user
-			$old_userid = $userid;
-			// update existing files to the new user
-			$query = $db->prepare('UPDATE FILES SET userid = ? WHERE userid = ?');
-			$query->bind_param('ss', $new_userid, $old_userid);
-			$query->execute();
-			//
-			$_SESSION['userid'] = $new_userid;
-			$_SESSION['loggedin'] = true;
-			
-			
-			header("Location: ./");
+			$loginok = true;
 		} else {
 			$badlogin = true;
 			include("html/login.php");
@@ -59,6 +48,53 @@ if (isset($_POST['email'])) {
 		}
 		
 		
+	} else if ($config['auth_type'] == "adldap") {
+	
+		if ($adldap->authenticate($email, $password)){
+			//establish your session and redirect
+			
+			$query = $db->prepare('SELECT userid FROM users WHERE email = ?');
+			$query->bind_param('s', $email);
+			$query->execute();
+				
+			$query->bind_result($a);
+			
+		    while ($query->fetch()) {	    
+			    // account already exists
+			    $new_userid = $a;
+			}
+			
+			if (!isset($new_userid)) {
+				$query = $db->prepare('INSERT INTO users (email) VALUES (?)');
+				$query->bind_param('s', $email);
+				$query->execute();
+				$new_userid = $query->insert_id();
+			}
+			
+			$loginok = true;
+			
+		} else {
+			$badlogin = true;
+			include("html/login.php");
+			die();
+		}
+	
+	}
+	
+	
+	if ($loginok) {
+		// login the user
+		$old_userid = $userid;
+		// update existing files to the new user
+		$query = $db->prepare('UPDATE FILES SET userid = ? WHERE userid = ?');
+		$query->bind_param('ss', $new_userid, $old_userid);
+		$query->execute();
+		//
+		$_SESSION['userid'] = $new_userid;
+		$_SESSION['loggedin'] = true;
+		
+		header("Location: ./");
+		die();
 	}
 	
 	

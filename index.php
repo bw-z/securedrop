@@ -64,7 +64,10 @@ if (isset($_GET['encrypt'])) {
 		<?php if ($config['allow_accounts'] && !$_SESSION['loggedin']) { ?>
 			<form class="navbar-form navbar-right" action="login" method="post">
 				<div class="form-group">
-				  <input name="email" type="text" class="form-control" placeholder="Username">
+				  <input name="email" type="text" class="form-control" 
+				  	<? if ($config['auth_type'] == "adldap") { ?> placeholder="Username" <? } ?>
+				  	<? if ($config['auth_type'] == "local") { ?> placeholder="Email" <? } ?>
+				  	>
 				  <input name="password" type="password" class="form-control" placeholder="Password">
 				</div>
 				<button type="submit" class="btn btn-default">Login</button>

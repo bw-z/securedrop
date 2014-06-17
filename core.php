@@ -27,7 +27,19 @@ if ($config['encrypt']) {
 	while ($query->fetch()) {
 		$config['secret'] = $a;
 	}	
-}	
+}
+
+//connect to ad auth
+if ($config['auth_type'] == "adldap") {
+	include ("adLDAP/adLDAP.php");
+	try {
+	    $adldap = new adLDAP();
+	}
+	catch (adLDAPException $e) {
+	    echo $e; 
+	    die(); 
+	}
+}
 
 //function to generate a random string
 function genRandomString($l) {

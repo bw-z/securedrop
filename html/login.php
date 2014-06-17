@@ -36,7 +36,10 @@
         <? if (isset($badlogin)) { ?>
         	<div class="alert alert-danger"><b>Invalid Login</b> Please try again. </div>
         <? } ?>
-        <input name="email" type="email" class="form-control" placeholder="Email address" required autofocus>
+        <input name="email" type="email" class="form-control"  required autofocus 
+	        <? if ($config['auth_type'] == "adldap") { ?> placeholder="Username" <? } ?>
+			<? if ($config['auth_type'] == "local") { ?> placeholder="Email address" <? } ?>
+		>
         <input name="password" type="password" class="form-control" placeholder="Password" required>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
