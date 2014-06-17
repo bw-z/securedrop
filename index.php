@@ -54,19 +54,29 @@ if (isset($_GET['encrypt'])) {
         
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
+          	<?php if ($config['allow_accounts'] && $config['auth_type'] == "local" && !$_SESSION['loggedin']) { ?>
+          		<li><a href="create">Create Account</a></li>
+          	<?php } ?>
             <li><a href="mailto:<?=$config['contact_email']?>">Contact</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+
 		
-		<!--
-		<form class="navbar-form navbar-right" role="search" action="login" method="post">
-			<div class="form-group">
-			  <input type="text" class="form-control" placeholder="Username">
-			  <input type="password" class="form-control" placeholder="Password">
-			</div>
-			<button type="submit" class="btn btn-default">Login</button>
-		  </form>
-		  -->
+		<?php if ($config['allow_accounts'] && !$_SESSION['loggedin']) { ?>
+			<form class="navbar-form navbar-right" action="login" method="post">
+				<div class="form-group">
+				  <input name="email" type="text" class="form-control" placeholder="Username">
+				  <input name="password" type="password" class="form-control" placeholder="Password">
+				</div>
+				<button type="submit" class="btn btn-default">Login</button>
+			  </form>
+	    <?php } ?>
+	    <?php if ($config['allow_accounts'] && $_SESSION['loggedin']) { ?>
+				 <ul class="nav navbar-nav navbar-right">
+					 <li><a href="logout">Logout</a></li>
+				 </ul>
+	    <?php } ?>
+	    
+	     </div><!--/.nav-collapse -->
 		  
       </div>
     </div>
@@ -88,12 +98,12 @@ if (isset($_GET['encrypt'])) {
         	?> 
         	after they are uploaded. 
         	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	&nbsp;&nbsp;&nbsp;
         	
         	<? if ($config['encrypt']) { ?>
 	        	File Encryption:<sup>beta</sup>
 	        	
-	        	&nbsp;&nbsp;&nbsp; 
+	        	&nbsp;
 	        	
 	        	<? if ($_SESSION['encrypt'] == "on") { ?>
 		        	<a href="?encrypt=off">On</a>
@@ -111,6 +121,9 @@ if (isset($_GET['encrypt'])) {
         <? } ?>
         <? if (isset($_GET['deleted'])) { ?>
         	<div class="alert alert-success"><b>File Deleted</b> <?=htmlspecialchars($_GET['file'])?> has been deleted. </div>
+        <? } ?>
+        <? if (isset($_GET['usercreated'])) { ?>
+        	<div class="alert alert-success"><b>Account created</b> - you can now login above. </div>
         <? } ?>
         
         
