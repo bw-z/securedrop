@@ -1,6 +1,6 @@
 <?php
 
-$config['version'] = "v0.2";
+$config['version'] = "v0.3";
 
 // Start a session and create a userID if one does not already exist
 session_start();
