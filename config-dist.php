@@ -40,4 +40,17 @@ $config['contact_email'] = "help@domain.com";
 // accounts and login
 $config['allow_accounts'] = true;
 $config['auth_type'] = "local";
+//                      local or adldap supported
+
+//for adldap auth
+$config['ADLDAP_LDAP_PORT'] = 389;
+$config['ADLDAP_LDAPS_PORT'] = 636;
+$config['ADLDAP_accountSuffix'] = "@mydomain.local";
+$config['ADLDAP_baseDn'] = "DC=mydomain,DC=local";
+$config['ADLDAP_domainControllers'] = array("dc01.mydomain.local");
+$config['ADLDAP_useSSL'] = false;
+$config['ADLDAP_useTLS'] = false;
+
+
+
 ?>
