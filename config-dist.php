@@ -37,4 +37,7 @@ $config['encrypt'] = false;
 //contact email address
 $config['contact_email'] = "help@domain.com";
 
+// accounts and login
+$config['allow_accounts'] = true;
+$config['auth_type'] = "local";
 ?>
