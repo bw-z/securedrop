@@ -21,10 +21,10 @@ v0.2 Current Stable (v0.2 branch)
 
 v0.3 - In progress (master branch)
 - User Login & LDAP integration
-- Improved link copy
-- Extend file expiry
+
 
 v0.4
 - Cron job to delete jobs
-
+- Improved link copy
+- Extend file expiry
 
