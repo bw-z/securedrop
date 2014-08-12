@@ -27,7 +27,7 @@ $config['securedrop_home'] = "http://localhost:8888/securedrop";
 // ensure you can write to this folder, and it should be proteced from indexes etc
 // pref outside web root
 $ds = DIRECTORY_SEPARATOR;
-$config['upload_location'] = dirname( __FILE__ ) . $ds  . "uploads" . $ds; 
+$config['upload_location'] = dirname( __FILE__ ) .  $ds . ".." . $ds  . "uploads" . $ds; 
 
 
 //encrypt files at rest
