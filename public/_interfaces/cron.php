@@ -1,7 +1,7 @@
 <?php
 
-include_once("../config.php");
-include_once("../core.php");
+include_once("../../config.php");
+include_once("../../core.php");
 
 $t = time();
 //load expired files

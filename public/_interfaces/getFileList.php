@@ -1,8 +1,8 @@
 <?php
 
 	
-	include_once("../config.php");
-	include_once("../core.php");
+	include_once("../../config.php");
+	include_once("../../core.php");
 	
 	validateHTTPS($config);
 
