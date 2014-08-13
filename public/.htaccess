@@ -4,6 +4,9 @@
 <FilesMatch "^delete$">
     ForceType application/x-httpd-php
 </FilesMatch>
+<FilesMatch "^extend$">
+    ForceType application/x-httpd-php
+</FilesMatch>
 <FilesMatch "^create$">
     ForceType application/x-httpd-php
 </FilesMatch>

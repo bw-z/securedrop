@@ -1,0 +1,44 @@
+<?php
+
+	include_once("../config.php");
+	include_once("../core.php");
+	
+	validateHTTPS($config);
+
+    $expl = explode("/",$_SERVER["REQUEST_URI"]);
+    $fileid = $expl[count($expl)-1];  
+    
+    $query = $db->prepare('SELECT accesskey, expiry, filename FROM files WHERE fileid = ? AND userid = ?');
+	$query->bind_param('ss', $fileid, $userid);
+	$query->execute();
+    
+    $query->bind_result($a, $b, $c);
+    while ($query->fetch()) {
+    	$accesskey = $a;
+    	$expiry = $b;
+    	$filename = $c; 
+    }
+    
+	if (!isset($accesskey)) {
+		sleep(2);
+		header("Location: ../?badextend");
+		die();
+	}
+	
+	if (!isset($_GET['token']) || $_GET['token'] != $_SESSION['token']) {
+		sleep(2);
+		header("Location: ../?badextend");
+		die();
+	}
+	
+	$expiry += $config['file_expiry'] * 60 * 60;
+    
+    $query = $db->prepare('UPDATE files SET expiry = ? WHERE fileid = ?');
+	$query->bind_param('ss', $expiry, $fileid);
+	$query->execute();
+		
+	header("Location: ../?extended&file=" . urlencode($filename));
+    
+    
+    
+    ?>

@@ -49,7 +49,7 @@ if (isset($_GET['encrypt'])) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SecureDrop<sup>beta <?=$config['version']?></sup></a>
+          <a class="navbar-brand" href=".">SecureDrop<sup>beta <?=$config['version']?></sup></a>
         </div>
         
         <div class="collapse navbar-collapse">
@@ -122,8 +122,14 @@ if (isset($_GET['encrypt'])) {
         <? if (isset($_GET['baddelete'])) { ?>
         	<div class="alert alert-danger"><b>Error</b> You cannot delete this file. </div>
         <? } ?>
+        <? if (isset($_GET['badextend'])) { ?>
+        	<div class="alert alert-danger"><b>Error</b> You cannot extend expiry of this file. </div>
+        <? } ?>
         <? if (isset($_GET['deleted'])) { ?>
         	<div class="alert alert-success"><b>File Deleted</b> <?=htmlspecialchars($_GET['file'])?> has been deleted. </div>
+        <? } ?>
+        <? if (isset($_GET['extended'])) { ?>
+        	<div class="alert alert-success"><b>File Expiry Extended</b> Expiry date for <?=htmlspecialchars($_GET['file'])?> has been extended. </div>
         <? } ?>
         <? if (isset($_GET['usercreated'])) { ?>
         	<div class="alert alert-success"><b>Account created</b> - you can now login above. </div>
@@ -189,7 +195,9 @@ if (isset($_GET['encrypt'])) {
 						" + data[i].filename + "</a></td> \
 						<td><a href=\"delete/" + data[i].fileid + "?token=<?=$_SESSION['token']?>\">Delete</a></td> \
 						<td>" + data[i].textDate + "</td> \
-						<td>" + data[i].expires + "</td> \
+						<td> <a href=\"extend/" + data[i].fileid + "\?token=<?=$_SESSION['token']?>\"><button type=\"button\" class=\"btn btn-default btn-sm\">  <span class=\"glyphicon glyphicon-plus\"></span> \
+						</button></a> <span style=\"font-size: 12px;\">" + data[i].expires + "</span>  </td> \
+						\
 						<td><button id=\"cl_"+ data[i].fileid +"\" type=\"button\" data-clipboard-text=\"<?=$config['securedrop_home']?>/d/" + data[i].accesskey + "\" class=\"btn btn-default btn-sm\">  <span class=\"glyphicon glyphicon-link\"></span> Copy \
 						</button> \
 						<a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"><span style=\"font-size: 12px;\"><?=$config['securedrop_home']?>/d/" + data[i].accesskey + "</span></a> \
