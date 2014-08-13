@@ -11,6 +11,9 @@ if (!isset($_SESSION['userid'])) {
 }
 $userid = $_SESSION['userid'];
 
+// CSRF token for sensitive functions
+if (!isset($_SESSION['token'])) $_SESSION['token'] = md5(uniqid(mt_rand(), true));
+
 // Connect to the DB
 // uses variables from config.php
 $db = mysqli_connect($db_server, $db_username, $db_password, $db_name);
