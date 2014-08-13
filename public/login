@@ -36,7 +36,7 @@ if (isset($_POST['email'])) {
 			die();
 		}
 		
-		include_once("Bcrypt.php");
+		include_once("../Bcrypt.php");
 		$bcrypt = new Bcrypt(10);
 		
 		if ($bcrypt->verify($password, $hash)) {

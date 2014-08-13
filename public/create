@@ -50,7 +50,7 @@ if (isset($_POST['email'])) {
 
 
 // create account and redirect the user if all ok
-	include_once("Bcrypt.php");
+	include_once("../Bcrypt.php");
 	$bcrypt = new Bcrypt(10);
 	
 	$hash = $bcrypt->hash($password);
