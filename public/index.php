@@ -100,20 +100,22 @@ if (isset($_GET['encrypt'])) {
 	        	}
         	?> 
         	after they are uploaded. 
-        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        	&nbsp;&nbsp;&nbsp;
         	
-        	<? if ($config['encrypt']) { ?>
-	        	File Encryption:<sup>beta</sup>
-	        	
-	        	&nbsp;
-	        	
-	        	<? if ($_SESSION['encrypt'] == "on") { ?>
-		        	<a href="?encrypt=off">On</a>
-	        	<? } else { ?>
-	        		<a href="?encrypt=on">Off</a>
-	        	<? } ?>
-	        <? } ?>
+        	
+        	
+        	<span class="pull-right">
+	        	<? if ($config['encrypt']) { ?>
+		        	File Encryption:<sup>beta</sup>
+		        	
+		        	&nbsp;
+		        	
+		        	<? if ($_SESSION['encrypt'] == "on") { ?>
+			        	<a href="?encrypt=off">On</a>
+		        	<? } else { ?>
+		        		<a href="?encrypt=on">Off</a>
+		        	<? } ?>
+		        <? } ?>
+        	</span>
         	</p>
         	
         <? if (isset($_GET['badfile'])) { ?>
