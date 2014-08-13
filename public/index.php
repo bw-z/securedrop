@@ -138,6 +138,7 @@ if (isset($_GET['encrypt'])) {
         <? } ?>
 		
 		<h2>My Files</h2>
+		
 		<div id="files"></div>
 
       </div>
@@ -151,13 +152,16 @@ if (isset($_GET['encrypt'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="dropzone.js"></script>
+    <script type="text/javascript" src="zeroclipboard/ZeroClipboard.js"></script>
     <script>
         Dropzone.options.drop = {
 		  maxFilesize: <?=$config['max_file_size']?>, // MB
 		};
-	</script>
+	</script>	
+	
     <script>
-    
+    	
+    	
     	function refreshdiv() {
     	
     		jQuery.getJSON('_interfaces/getFileList.php', function(data) {
@@ -169,7 +173,7 @@ if (isset($_GET['encrypt'])) {
 									<th></th> \
 						    		<th>Uploaded</th> \
 									<th>Expires</th> \
-						    		<th>Sharelink</th> \
+						    		<th>Shareable Link</th> \
 						    	</tr> ";
 				
 				 
@@ -186,11 +190,18 @@ if (isset($_GET['encrypt'])) {
 						<td><a href=\"delete/" + data[i].fileid + "\">Delete</a></td> \
 						<td>" + data[i].textDate + "</a></td> \
 						<td>" + data[i].expires + "</a></td> \
-						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"><?=$config['securedrop_home']?>/d/" + data[i].accesskey + "</a></td> \
+						<td><button id=\"cl_"+ data[i].fileid +"\" type=\"button\" data-clipboard-text=\"<?=$config['securedrop_home']?>/d/" + data[i].accesskey + "\" class=\"btn btn-default btn-sm\">  <span class=\"glyphicon glyphicon-link\"></span> Copy \
+						</button> \
+						<a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"><span style=\"font-size: 12px;\"><?=$config['securedrop_home']?>/d/" + data[i].accesskey + "</span></a> \
+						 </td> \
 					</tr>";
 	    			
     			}
     			$('#files').html(stuff + "</table>");
+    			
+    			for (var i = 0; i < data.length; i++) {
+    				var client = new ZeroClipboard( document.getElementById('cl_' + data[i].fileid) );
+    			}
     			
     		});
 			
