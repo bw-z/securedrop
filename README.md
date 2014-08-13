@@ -3,10 +3,11 @@ securedrop
 
 A secure drop server enabling you to share links to acces files
 
-Uses these great tools;
+Built using these great tools;
 - Bcrypt
 - Dropzone.js
 - Bootstrap
+- zeroclipboard (https://github.com/zeroclipboard/zeroclipboard)
 
 v0.1
 - Initial Version
@@ -22,8 +23,11 @@ v0.2
 v0.3
 - User Login & LDAP integration
 
-v0.4 - wip
+v0.4
 - Cron job to delete jobs
 - Improved link copy
 - Extend file expiry
+
+v0.5(wip)
+- 
 
