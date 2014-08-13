@@ -11,7 +11,19 @@ ini_set('max_execution_time', 3000);
  
 if (!empty($_FILES)) {
      
-    $tempFile = $_FILES['file']['tmp_name'];        
+    $tempFile = $_FILES['file']['tmp_name'];
+    
+    $filesize = 0;
+    //verify file upload size
+    $filesize = $_FILES['file']['size'];
+    
+    
+    
+    if ($filesize > $config['max_file_size'] * 1000000) {
+	    header("Location: ../?uploaderror");
+	    die();
+    }
+    
     
     $filekey = genKey(20);
 	$timestamp = time();
@@ -28,17 +40,19 @@ if (!empty($_FILES)) {
     											timestamp, 
     											userid,
     											expiry,
-    											encrypted
+    											encrypted,
+    											filesize
     										) 
-    											VALUES(?, ?, ?, ?, ?, ?)");
+    											VALUES(?, ?, ?, ?, ?, ?, ?)");
 	
-	$query->bind_param('ssssss', 
+	$query->bind_param('sssssss', 
 							$filekey, 
 							$_FILES['file']['name'], 
 							$timestamp, 
 							$userid, 
 							$expiry,
-							$encrypt);
+							$encrypt,
+							$filesize);
 	$query->execute();
 	
 	$targetFile = $config['upload_location'] . $filekey . ".secureuploadfile";
