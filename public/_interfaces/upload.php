@@ -47,7 +47,15 @@ if (!empty($_FILES)) {
 			if ($config['encrypt'] && $_SESSION['encrypt'] == "on") {
 				 
 				$passphrase = $config['secret'];
+				
+				
+				$filecrypt = new filecrypt();
+				
+				 $filecrypt->encryptFileChunks($_FILES['file']['tmp_name'], $targetFile, $passphrase);
 				 
+				 //$filecrypt->decryptFileChunks('encrypted.gif', 'decrypted.gif', $key);
+				
+				/* 
 				$iv = substr(md5("\x1B\x3C\x58".$passphrase, true), 0, 8);
 				$key = substr(md5("\x2D\xFC\xD8".$passphrase, true) .
 				md5("\x2D\xFC\xD9".$passphrase, true), 0, 24);
@@ -58,6 +66,7 @@ if (!empty($_FILES)) {
 				fwrite($fp, file_get_contents($_FILES['file']['tmp_name']));
 				 
 				fclose($fp);
+				*/
 			
 			} else {
 				 

@@ -32,7 +32,11 @@
 		if ($encrypted) {
 		
 			$passphrase = $config['secret'];
-			 
+			
+			$filecrypt = new filecrypt();
+			$filecrypt->decryptFileChunks($targetFile, $targetFile . ".dec", $passphrase);
+			
+			/*
 			$iv = substr(md5("\x1B\x3C\x58".$passphrase, true), 0, 8);
 			$key = substr(md5("\x2D\xFC\xD8".$passphrase, true) .
 			md5("\x2D\xFC\xD9".$passphrase, true), 0, 24);
@@ -43,7 +47,13 @@
 
 			header("Content-disposition: attachment; filename=$filename");
 	    	fpassthru($fp);
-	    
+			*/
+			
+			header("Content-disposition: attachment; filename=$filename");
+			echo file_get_contents($targetFile . ".dec"); 
+			
+			unlink($targetFile . ".dec");
+			
 			die();
 		
 		} else {
