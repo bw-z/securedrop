@@ -1,12 +1,17 @@
 securedrop
 ==========
 
-A secure drop server enabling you to share links to acces files
+A secure drop server enabling you to share links to access files.
 
-Built using these great tools;
+Written by bw-z, includes other components as specified below; 
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+Built using these great tools; 
 - Bcrypt
-- Dropzone.js
-- Bootstrap
+- Dropzone.js (http://www.dropzonejs.com/)
+- Bootstrap (http://getbootstrap.com/)
 - zeroclipboard (https://github.com/zeroclipboard/zeroclipboard)
 
 v0.1
