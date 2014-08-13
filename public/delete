@@ -23,6 +23,12 @@
 		header("Location: ../?baddelete");
 		die();
 	}
+	
+	if (!isset($_GET['token']) || $_GET['token'] != $_SESSION['token']) {
+		sleep(2);
+		header("Location: ../?baddelete");
+		die();
+	}
    
     $targetFile = $config['upload_location'] . $accesskey . ".secureuploadfile";
     

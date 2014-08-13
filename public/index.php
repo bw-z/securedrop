@@ -187,7 +187,7 @@ if (isset($_GET['encrypt'])) {
 	    				<td>" + enc + "</td> \
 						<td><a target=\"_blank\" href=\"d/" + data[i].accesskey + "\"> \
 						" + data[i].filename + "</a></td> \
-						<td><a href=\"delete/" + data[i].fileid + "\">Delete</a></td> \
+						<td><a href=\"delete/" + data[i].fileid + "?token=<?=$_SESSION['token']?>\">Delete</a></td> \
 						<td>" + data[i].textDate + "</a></td> \
 						<td>" + data[i].expires + "</a></td> \
 						<td><button id=\"cl_"+ data[i].fileid +"\" type=\"button\" data-clipboard-text=\"<?=$config['securedrop_home']?>/d/" + data[i].accesskey + "\" class=\"btn btn-default btn-sm\">  <span class=\"glyphicon glyphicon-link\"></span> Copy \
