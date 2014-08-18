@@ -101,8 +101,6 @@ if (isset($_GET['encrypt'])) {
         	?> 
         	after they are uploaded. 
         	
-        	
-        	
         	<span class="pull-right">
 	        	<? if ($config['encrypt']) { ?>
 		        	File Encryption:<sup>beta</sup>
@@ -116,6 +114,13 @@ if (isset($_GET['encrypt'])) {
 		        	<? } ?>
 		        <? } ?>
         	</span>
+        	
+        	<br><br>
+        	<small>Multiple files can be uploaded at once. Archive or zip a folder to upload/download it as one file.</small>
+        	
+        	
+        	
+        	
         	</p>
         	
         <? if (isset($_GET['badfile'])) { ?>
