@@ -36,21 +36,13 @@
 			$filecrypt = new filecrypt();
 			$filecrypt->decryptFileChunks($targetFile, $targetFile . ".dec", $passphrase);
 			
-			/*
-			$iv = substr(md5("\x1B\x3C\x58".$passphrase, true), 0, 8);
-			$key = substr(md5("\x2D\xFC\xD8".$passphrase, true) .
-			md5("\x2D\xFC\xD9".$passphrase, true), 0, 24);
-			$opts = array('iv'=>$iv, 'key'=>$key);
-			 
-			$fp = fopen($targetFile, 'rb');
-			stream_filter_append($fp, 'mdecrypt.tripledes', STREAM_FILTER_READ, $opts);
-
 			header("Content-disposition: attachment; filename=$filename");
-	    	fpassthru($fp);
-			*/
-			
-			header("Content-disposition: attachment; filename=$filename");
-			echo file_get_contents($targetFile . ".dec"); 
+			$file = @fopen($targetFile . ".dec","rb");
+            while(!feof($file)) {
+                print(@fread($file, 500024*8));
+                ob_flush();
+                flush();
+            }
 			
 			unlink($targetFile . ".dec");
 			
@@ -58,7 +50,12 @@
 		
 		} else {
 			header("Content-disposition: attachment; filename=$filename");
-			echo file_get_contents($targetFile); 
+			$file = @fopen($targetFile,"rb");
+            while(!feof($file)) {
+                print(@fread($file, 500024*8));
+                ob_flush();
+                flush();
+            } 
 			
 		}
     
